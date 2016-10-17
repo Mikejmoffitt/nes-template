@@ -1,0 +1,14 @@
+*.o
+*.nes
+*.srm
+*.deb
+*.nl
+*.pyc
+*/__pycache__/
+map.txt
+*listing.txt
+src/*.swp
+*.swp
+*.cdl
+labels.txt
+tools/fceux/fcs/*
