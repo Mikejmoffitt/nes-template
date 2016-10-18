@@ -1,6 +1,7 @@
 .macpack generic
 .feature force_range
 
+; Borrowed from https://github.com/furrykef/pacman
 
 ; These are fairly standard names
 PPUCTRL     = $2000
