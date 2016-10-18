@@ -1,5 +1,7 @@
 .segment "HEADER"
 
+; Borrowed from https://github.com/furrykef/pacman
+
 ; Magic cookie
 .byte "NES", $1a
 
