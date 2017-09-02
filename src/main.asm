@@ -181,13 +181,6 @@ main_entry:
 	; and for sprites, which start at $1000.
 	ppu_write_32kbit sample_chr_data + $1000, #$10
 
-	; Finally, bring in a nametable so the background will draw something.
-	; The first nametable begins at $2000, so we specify $20(00).
-	ppu_write_8kbit sample_nametable_data, #$20
-
-	; Duplicate the nametable into the other screen as well.
-	ppu_write_8kbit sample_nametable_data, #$24
-
 	; Bring the PPU back up.
 	jsr wait_nmi
 	ppu_enable
@@ -217,9 +210,6 @@ main_top_loop:
 ; The sample graphics resources.
 sample_chr_data:
 	.incbin "resources/chr.chr"
-
-sample_nametable_data:
-	.incbin "resources/nametable.nam"
 
 sample_palette_data:
 	.byte	$0F, $01, $23, $30
