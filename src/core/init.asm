@@ -1,4 +1,4 @@
-	.segment	"BANKFIXED"
+	.segment	"PRGFIXED"
 
 	.include	"macros/famicom.inc"
 	.include	"macros/ppu.inc"

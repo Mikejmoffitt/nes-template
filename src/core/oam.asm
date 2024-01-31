@@ -1,4 +1,4 @@
-	.segment	"BANKFIXED"
+	.segment	"PRGFIXED"
 	.include	"macros/famicom.inc"
 
 	.export	oam_init

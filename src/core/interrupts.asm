@@ -4,7 +4,7 @@
 
 	.include	"macros/famicom.inc"
 
-	.segment "BANKFIXED"
+	.segment "PRGFIXED"
 
 ; ============================
 ; NMI ISR

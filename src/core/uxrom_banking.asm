@@ -7,7 +7,7 @@
 
 	.export	uxrom_set_bank_a
 
-	.segment	"BANKFIXED"
+	.segment	"PRGFIXED"
 
 ; Table for UxROM bankswitching without bus conflicts.
 	.if (HW_MAPPER = 2) || (HW_MAPPER = 94) || (HW_MAPPER = 180)

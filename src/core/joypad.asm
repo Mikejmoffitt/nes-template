@@ -5,7 +5,7 @@
 
 	.importzp	Temp, Temp2
 
-	.segment	"BANKFIXED"
+	.segment	"PRGFIXED"
 
 	.include	"macros/famicom.inc"
 

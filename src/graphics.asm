@@ -4,7 +4,7 @@
 ; Addresses $C000-$FFFF are hardwired to Bank F in the 2A03's data space "PRG",
 ; but the upper half of ROM space at $8000-BFFF can be switched out when the
 ; programmer desires. 
-	.segment "BANKE"
+	.segment "PRGE"
 
 	.export	sample_chr_data
 	.export	sample_palette_data

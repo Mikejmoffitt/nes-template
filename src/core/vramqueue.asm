@@ -1,4 +1,4 @@
-	.segment	"BANKFIXED"
+	.segment	"PRGFIXED"
 	.include	"macros/famicom.inc"
 	.include	"macros/mmc3.inc"
 	.include	"config.inc"
@@ -32,7 +32,7 @@
 ; Else:
 ; ..ll llll Data byte count (if PPU address set marker is 0)
 
-	.segment	"BANKFIXED"
+	.segment	"PRGFIXED"
 
 vram_queue_set_ppu:
 	ldx	VramQueueReadIdx
