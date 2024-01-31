@@ -1,4 +1,4 @@
-HW_PRG_BYTES        = 256
+HW_PRG_BYTES        = 8192
 HW_CHR_BYTES        = 0  ; CHR RAM.
 HW_MAPPER           = $02  ; Typical UxROM
 ; Byte 6
