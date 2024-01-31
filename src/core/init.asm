@@ -4,6 +4,12 @@
 	.include	"macros/ppu.inc"
 
 	.export	reset_vector
+
+	.import	PpuCtrlConfig
+	.import	PpuMaskConfig
+
+	.import	oam_init
+	.import	vram_queue_init
 	.import	main
 
 reset_vector:
@@ -30,6 +36,7 @@ reset_vector:
 	bit	PPUSTATUS
 	bne	@waitvbl1
 
+	dex
 	txa  ; X still = 0; clear A with this
 @clrmem:
 	sta	$000, x
@@ -49,12 +56,12 @@ reset_vector:
 	bne	@waitvbl2
 
 ; PPU configuration for actual use
-	ldx	#%10010000	; Nominal PPUCTRL settings:
+	ldx	#%10001000	; Nominal PPUCTRL settings:
 				; NMI enable
 				; Slave mode (don't change this!)
 				; 8x8 sprites
-				; BG at $1000
-				; SPR at $0000
+				; BG at $0000
+				; SPR at $1000
 				; VRAM auto-inc 1
 				; Nametable at $2000
 	stx	PpuCtrlConfig

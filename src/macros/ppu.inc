@@ -227,9 +227,3 @@
 	lda	val
 	oam_write_x idx
 .endmacro
-
-; Run an OAM DMA
-.macro oam_dma
-	lda	#$02
-	sta	OAMDMA
-.endmacro
