@@ -6,6 +6,9 @@ MEMORY
     OAM:       start = $0200, size = $0100, file="";
     RAM:       start = $0300, size = $0400, file="";
 
+    # Special
+    HEADER:    start = $0000, size = $0010, fill = yes, fillval=$FF;
+
     # PRG ROM
     ROM0:      start = $8000, size = $4000, file = %O, type = ro, fill=yes, fillval=$00;
     ROM1:      start = $8000, size = $4000, file = %O, type = ro, fill=yes, fillval=$01;
@@ -23,21 +26,16 @@ MEMORY
     ROMD:      start = $8000, size = $4000, file = %O, type = ro, fill=yes, fillval=$0D;
     ROME:      start = $8000, size = $4000, file = %O, type = ro, fill=yes, fillval=$0E;
     ROMF:      start = $C000, size = $4000, file = %O, type = ro, fill=yes, fillval=$0F;
-
-    # Special
-    HEADER:    start = $0000, size = $0010, fill = yes, fillval=$FF;
 }
 
 SEGMENTS 
 {
+    HEADER:    load = HEADER, type = ro;
+
     ZP:        load = ZP, type = zp;
     STACK:     load = STACK, type = bss, align = $100;
     OAM_LIST:  load = OAM, type = bss, align = $100;
     BSS:       load = RAM, type = bss, align = $100;
-
-    # The last bank, fixed.
-    BANKFIXED: load = ROMF, type = ro, start = $C000;
-    VECTORS:   load = ROMF, type = ro, start = $FFFA;
 
     # Switchable Banks
     BANK0:     load = ROM0, type = ro, start = $8000, optional = yes;
@@ -56,6 +54,8 @@ SEGMENTS
     BANKD:     load = ROMD, type = ro, start = $8000, optional = yes;
     BANKE:     load = ROME, type = ro, start = $8000, optional = yes;
 
-    HEADER:    load = HEADER, type = ro;
+    # The last bank, fixed.
+    BANKFIXED: load = ROMF, type = ro, start = $C000;
+    VECTORS:   load = ROMF, type = ro, start = $FFFA;
 
 }

@@ -1,4 +1,4 @@
-.segment "HEADER"
+	.segment	"HEADER"
 
 ; TODO: This should be somewhat generated based on the resulting output
 
