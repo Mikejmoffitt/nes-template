@@ -7,7 +7,7 @@
 
 	.segment	"BANKFIXED"
 
-	.include	"def/famicom.inc"
+	.include	"macros/famicom.inc"
 
 ; Reads controller. Reliable when DMC is playing.
 ; Out: A=buttons held, A button in bit 0

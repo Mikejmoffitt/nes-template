@@ -2,7 +2,7 @@
 	.export	irq_vector
 	.export	wait_nmi
 
-	.include	"def/famicom.inc"
+	.include	"macros/famicom.inc"
 
 	.segment "BANKFIXED"
 

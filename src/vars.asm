@@ -1,11 +1,13 @@
 	.exportzp	Temp, Temp2, Temp3, Temp4, Temp5, Temp6, Temp7, Temp8
+	.exportzp	Addr, Addr2, Addr3, Addr4
 	.export	PpuMaskConfig, PpuCtrlConfig
 
-; =============================
-; Zero-page and main RAM
-; Variables, flags, etc.
-; =============================
 	.segment "ZP"
+; Scratch memory for temporary variables and arguments
+Addr:		.res 2
+Addr2:		.res 2
+Addr3:		.res 2
+Addr4:		.res 2
 Temp:		.res 1
 Temp2:		.res 1
 Temp3:		.res 1

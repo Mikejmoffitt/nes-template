@@ -1,7 +1,7 @@
 	.segment	"BANKFIXED"
 
-	.include	"def/famicom.inc"
-	.include	"def/macros.inc"
+	.include	"macros/famicom.inc"
+	.include	"macros/ppu.inc"
 
 	.export	reset_vector
 	.import	main
@@ -49,12 +49,12 @@ reset_vector:
 	bne	@waitvbl2
 
 ; PPU configuration for actual use
-	ldx	#%10001000	; Nominal PPUCTRL settings:
+	ldx	#%10010000	; Nominal PPUCTRL settings:
 				; NMI enable
 				; Slave mode (don't change this!)
 				; 8x8 sprites
-				; BG at $0000
-				; SPR at $1000
+				; BG at $1000
+				; SPR at $0000
 				; VRAM auto-inc 1
 				; Nametable at $2000
 	stx	PpuCtrlConfig

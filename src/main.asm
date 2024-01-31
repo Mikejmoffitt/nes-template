@@ -1,11 +1,14 @@
-	.include	"def/famicom.inc"
-	.include	"def/macros.inc"
+	.include	"macros/famicom.inc"
+	.include	"macros/uxrom.inc"
+	.include	"macros/ppu.inc"
 
 ; -----------------------------------------------------------------------------
 
 	.segment	"BANKFIXED"
 
 	.export	main
+
+	.importzp	Addr
 
 ; =============================================================================
 ; ====                                                                     ====
@@ -18,14 +21,8 @@ main:
 	; the video in the middle of a frame.
 	ppu_disable
 
-	; Put scroll at 0, 0
-	bit	PPUSTATUS
-	lda	#$00
-	sta	PPUSCROLL ; X scroll
-	sta	PPUSCROLL ; Y scroll
-
 	; Switch the upper half of PRG memory to Bank E
-	bank_load	#$0E
+	uxrom_bank_load	#$0E
 
 	; Load in a palette
 	ppu_load_bg_palette	sample_palette_data
@@ -38,20 +35,56 @@ main:
 	; and for sprites, which start at $1000.
 	ppu_write_32kbit	sample_chr_data + $1000, #$10
 
+	; Write a sample string.
+	ppu_load_addr ($2000 + (1 * $20) + 1)  ; (1, 1)
+
+	lda	#<str_hello_world
+	sta	Addr
+	lda	#>str_hello_world
+	sta	Addr+1
+	jsr	string_print_sub
+
+	; Put scroll at 0, 0
+	bit	PPUSTATUS
+	lda	#$00
+	sta	PPUSCROLL ; X scroll
+	sta	PPUSCROLL ; Y scroll
+
 	; Bring the PPU back up.
 	jsr	wait_nmi
 
 	ppu_enable
 
 @main_top_loop:
+	jsr	read_joy_safe
 	; Run game logic here
-
-	; End of game logic frame; wait for NMI (vblank) to begin
 	jsr	wait_nmi
+	ppu_disable
+
+	lda	PpuCtrlConfig
+	sta	PPUCTRL
+	lda	PpuMaskConfig
+	sta	PPUMASK
 
 	; Commit VRAM updates while PPU is disabled in vblank
-	;ppu_disable
-
-	; Re-enable PPU for the start of a new frame
-	;ppu_enable
+	; TODO: Sample VRAM queue process
+	ppu_enable
 	jmp	@main_top_loop; loop forever
+
+; Load Addr.w with the string address.
+string_print_sub:
+	ldy	#$00
+	lda	(Addr), y
+	bne	@copytop
+	rts
+
+@copytop:
+	iny
+	sta	PPUDATA
+	lda	(Addr), y
+	bne	@copytop
+@finished:
+	rts
+
+str_hello_world:
+	.byte	"HELLO FAMICOM",0
