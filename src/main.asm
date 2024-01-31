@@ -24,7 +24,7 @@ main:
 	sta	PPUSCROLL ; X scroll
 	sta	PPUSCROLL ; Y scroll
 
-	; Switch the upper half of PRG memory to Bank E (please see note below)
+	; Switch the upper half of PRG memory to Bank E
 	bank_load	#$0E
 
 	; Load in a palette
