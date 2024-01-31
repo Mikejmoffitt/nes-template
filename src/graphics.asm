@@ -7,15 +7,11 @@
 	.segment "BANKE"
 
 	.export	sample_chr_data
-	.export	sample_nametable_data
 	.export	sample_palette_data
 
 ; The sample graphics resources.
 sample_chr_data:
 	.incbin "resources/chr.chr"
-
-sample_nametable_data:
-	.incbin "resources/nametable.nam"
 
 sample_palette_data:
 	.byte	$0F, $01, $23, $30

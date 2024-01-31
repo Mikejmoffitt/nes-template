@@ -50,9 +50,11 @@ MAPNAME := map.txt
 LABELSNAME := labels.txt
 LISTNAME := listing.txt
 ROMNAME := $(PROJECT_NAME).nes
+DBGNAME := $(PROJECT_NAME).dbg
 
 # Toolchain configuration.
 ASFLAGS := --include-dir $(SRCDIR) \
+           -g \
            -U
 
 CCFLAGS := -I $(SRCDIR) \
@@ -62,7 +64,8 @@ CCFLAGS := -I $(SRCDIR) \
 
 LDFLAGS := -C $(LDSDIR)/$(LDSCRIPT) \
            -m $(OUTDIR)/$(MAPNAME) \
-           -Ln $(OUTDIR)/$(LABELSNAME)
+           -Ln $(OUTDIR)/$(LABELSNAME) \
+           --dbgfile $(OUTDIR)/$(DBGNAME)
 
 # Sources. You may replace the wildcards with explicit files if desired.
 SOURCES_H := $(shell find $(SRCDIR)/ -name '*.h' -print)
@@ -99,7 +102,7 @@ $(TOOLCHAIN): $(TOOLS_DIR)
 # The 2A03 software build.
 $(OUTDIR)/$(ROMNAME): $(OBJECTS_ASM) $(OBJECTS_C) $(OUTDIR) $(TOOLCHAIN)
 	@$(BASH) -c 'printf "\t\e[94m[ LNK ]\e[0m $(OBJECTS_ASM) $(OBJECTS_C)\n"'
-	$(LD65) $(LDFLAGS) $(OBJECTS_ASM) $(OBJECTS_C) -o $@
+	$(LD65) -o $@ $(LDFLAGS) $(OBJECTS_ASM) $(OBJECTS_C)
 
 $(OBJDIR)/%.o: %.asm $(SOURCES_H) $(OBJDIR) $(TOOLCHAIN)
 	@$(BASH) -c 'printf "\t\e[96m[ ASM ]\e[0m $<\n"'

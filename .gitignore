@@ -3,7 +3,7 @@
 *.nl
 *.pyc
 */__pycache__/
-./out/
+out/
 *.swp
 *.cdl
-./tools/cc65/
+tools/cc65/
