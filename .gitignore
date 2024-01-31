@@ -1,14 +1,9 @@
-*.o
-*.nes
 *.srm
 *.deb
 *.nl
 *.pyc
 */__pycache__/
-map.txt
-*listing.txt
-src/*.swp
+./out/
 *.swp
 *.cdl
-labels.txt
-tools/fceux/fcs/*
+./tools/cc65/

@@ -1,18 +1,39 @@
-NES Project Template
-====================
+NES / Famicom Project Template
+==============================
 
 What's the deal?
 ----------------
-This is a Nintendo Entertainment System project template. A short demonstration file is included that simply displays "HELLO NES!" on screen. The demo is strongly commented so as to assist newcomers. Also included is a collection of useful macros, which are also commented.
-
-If an aspiring programmer wishes to try out a new architecture or language, there are often simple toolchains that may be installed and used, with ample "getting started" materials. At the very least, providing a simple "Hello World" program is an encouraging start for a soon-to-be developer taking the first step. I have put this template together so I can point people towards it as a starting place for making something for the NES.
+This repository aims to provide a starting point for an assembly or C project targeting the Famicom or NES platforms. A sample Makefile and basic system code are provided and may be modified as desired.
+The Makefile builds separate assembly files as individual objects and links them together at the end.
 
 How do I use it?
 ----------------
-First, clone this repository.
-+	On Windows, just run build.bat and run.bat (preferably from the Command Prompt). Build.bat will assemble the .nes file using the included ca65 assembler (in tools/cc65), while run.bat will invoke the included FCEUX emulator (in tools/fceuxw).
-+	On Linux, fceux should be installed with your package manager, alongside the GNU Make utility. After that, you may build the project by just typing `make` in the terminal. A `run` target is specified, which will invoke FCEUX. A `debug` target is also specified, which will run the included Windows FCEUX, as the Linux SDL port does not include the debugging features.
-+	On Mac, the instructions are the same as on Linux, except that the included ca65 binary is an ELF binary, not the Mach-O binary required. You will have to build ca65 yourself (from the cc65 project). Choosing an emulator is an exercise for the user.
+First, clone this repository. For Windows users, Windows Subsystem for Linux (WSL) is the suggested usage environment, but you may be able to massage this to work with MSys2 or something similar.
+
+In a terminal:
+```
+	$ git clone git@github.com:mikejmoffitt/nes-template
+```
+
+You will need a basic C toolchain to compile the CC65 toolchain.
+
+```
+	$ sudo apt install build-essential  # for GCC, etc.
+```
+
+Now, try to build the template project. It will clone and compile the CC65 toolchain as needed.
+
+```
+	$ cd nes-template && make
+```
+
+If you have the emulator `fceux` in your PATH, you may use the `test` target:
+
+```
+	$ make test
+```
+
+If you wish to use another emulator, you can change the executable name in the Makefile. For Windows usage, you will want to point towards a native Windows-built emulator most likely.
 
 What's in the box?
 ------------------
@@ -21,8 +42,7 @@ The project comes with:
 +	Sample graphics data for the demo
 +	Linker configuration for a UxROM project (we have segments!)
 +	Comments on what does what
-+	Makefile and build/run scripts (for Linux and Windows respectively)
-+	ca65 toolchain binaries (to simplify Windows use for new users)
++	Makefile
 
 Technical stuff
 ---------------

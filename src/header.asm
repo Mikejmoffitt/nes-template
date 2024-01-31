@@ -1,24 +1,11 @@
 .segment "HEADER"
 
-; Borrowed from https://github.com/furrykef/pacman
+; TODO: This should be somewhat generated based on the resulting output
 
-; Magic cookie
-.byte "NES", $1a
-
-; Size of PRG in 16 KB units
-.byte 16
-
-; Size of CHR in 8 KB units (0 = CHR RAM)
-.byte 0
-
-; Mirroring, save RAM, trainer, mapper low nybble
-.byte $21                                   ; UNROM
-
-; Vs., PlayChoice-10, NES 2.0, mapper high nybble
-.byte $00
-
-; Size of PRG RAM in 8 KB units
-.byte 0
-
-; NTSC/PAL
-.byte $00
+.byte "NES", $1A
+.byte 256/16  ; PRG size / 16KiB
+.byte 0/16  ; CHR size / 8KiB
+.byte $21  ; Mirror, SRAM, trainer, mapper low nybble
+.byte $00  ; VS., PC-10, NES 2.0, mapper high nybble
+.byte 0/8  ; PRG ram size / 8KiB
+.byte $00  ; NTSC / PAL

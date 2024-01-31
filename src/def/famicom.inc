@@ -1,0 +1,64 @@
+; Famicom / NES memory-mapped IO
+
+; PPU
+PPUCTRL			= $2000
+PPUMASK			= $2001
+PPUSTATUS		= $2002
+OAMADDR			= $2003
+OAMDATA			= $2004
+PPUSCROLL		= $2005
+PPUADDR			= $2006
+PPUDATA			= $2007
+
+; I/O
+APUPU1			= $4000
+SQ1_VOL			= APUPU1 + 0
+SQ1_SWEEP		= APUPU1 + 1
+SQ1_LO			= APUPU1 + 2
+SQ1_HI			= APUPU1 + 3
+
+APUPU2			= $4004
+SW2_VOL			= APUPU2 + 0
+SW2_SWEEP		= APUPU2 + 1
+SW2_LO			= APUPU2 + 2
+SW2_HI			= APUPU2 + 3
+
+APUTRI			= $4008
+TRI_LINEAR		= APUTRI + 0
+TRI_LO			= APUTRI + 2
+TRI_HI			= APUTRI + 3
+
+APUNOI			= $400C
+NOISE_VOL		= APUNOI + 0
+NOISE_LO		= APUNOI + 2
+NOISE_HI		= APUNOI + 3
+
+APUDMC			= $4010
+DMC_FREQ		= APUDMC + 0
+DMC_RAW			= APUDMC + 1
+DMC_START		= APUDMC + 2
+DMC_LEN			= APUDMC + 3
+
+OAMDMA			= $4014
+
+APUSTATUS		= $4015      ; Read
+SND_CHN			= APUSTATUS  ; Write
+
+JOY1			= $4016  ; Write: strobe
+JOY2			= $4017
+APUFCOUNT		= $4017  ; Write
+
+; These registers are only active with the test pin (pin 30) asserted on 2A03 G and H.
+APUTEST1		= $4018
+APUTEST2		= $4019
+APUTEST3		= $401A
+
+; Button bit comparison table for reading joypads
+BUTTON_A		= %10000000
+BUTTON_B		= %01000000
+BUTTON_SEL		= %00100000
+BUTTON_START		= %00010000
+BUTTON_UP		= %00001000
+BUTTON_DOWN		= %00000100
+BUTTON_LEFT		= %00000010
+BUTTON_RIGHT		= %00000001
