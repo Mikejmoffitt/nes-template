@@ -10,10 +10,10 @@ FLAG7_MAPPER_HI = (HW_MAPPER & $F0)
 	.segment	"HEADER"
 ; iNES signature
 .byte	"NES", $1A
-.byte	(HW_PRG_BYTES) / 16  ; PRG size / 16KiB
-.byte	(HW_CHR_BYTES) / 16  ; CHR size / 8KiB
+.byte	(HW_PRG_BYTES) / 16384  ; PRG size / 16KiB
+.byte	(HW_CHR_BYTES) / 8192  ; CHR size / 8KiB
 .byte	(FLAG6_MIRROR|FLAG6_SRAM|FLAG6_VRAM_EXP|FLAG6_MAPPER_LO)
 .byte	(FLAG7_UNI|FLAG7_PC10|FLAG7_MAPPER_HI)
-.byte	(HW_PRG_SRAM_BYTES) / 8  ; PRG ram size / 8KiB
+.byte	(HW_PRG_SRAM_BYTES) / 8192  ; PRG ram size / 8KiB
 .byte	(HW_TV_PAL)
 .byte	(HW_PRG_SRAM_PRESENT << 4)
