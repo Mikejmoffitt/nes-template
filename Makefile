@@ -7,7 +7,7 @@
 # The base program name.
 PROJECT_NAME = nes_template
 
-# The mapper and linker script to be used (in `ldscripts/`)
+# The mapper and linker script to be used (in `cfg/`)
 LDSCRIPT := uorom.ld
 
 # It is assumed that `fceux` is in the user's path.
@@ -45,7 +45,7 @@ sp65 := $(TOOLCHAIN)/bin/sp65
 SRCDIR := src
 OUTDIR := out
 OBJDIR := $(OUTDIR)/obj
-LDSDIR := ldscripts
+LDSDIR := cfg
 MAPNAME := map.txt
 LABELSNAME := labels.txt
 LISTNAME := listing.txt
