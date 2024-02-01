@@ -7,30 +7,28 @@
 
 ; Initializes buffers and vars for the VRAM queue.
 	.export		vram_queue_init
-
 ; Call once per frame to process queued VRAM transfers.
 	.export		vram_queue_poll
-
 ; Call to queue a PPU address set.
 ; Set VramQueuePtr to the PPU address in question.
 ; Set A to $00 for a post-inc of 1, or $40 for a post-inc of 32.
 ; You should call this at least once before queueing a transfer.
 	.export		vram_queue_set_ppu
-
 ; Call to queue a transfer buffer.
 ; A indicates the requested buffer size.
 ; Sets VramQueuePtr to the address within the buffer.
 	.export		vram_queue_set_buffer
 
-; Operator byte format:
+; I expect most effective use of this interface to come from macros/vramqueue.inc.
 
-; 7654 3210
-; a... .... PPU address set marker
-; If PPU address:
-; .v.. .... PPU post-inc mode (0 = 1, 1 = 32)
-; .... hhhh High PPU address bits
-; Else:
-; ..ll llll Data byte count (if PPU address set marker is 0)
+	.segment	"ZEROPAGE"
+VramQueueWriteIdx:	.res 1
+VramQueueReadIdx:	.res 1
+VramQueueParseMode:	.res 1
+VramQueuePtr:	.res 2
+
+	.segment	"BSS"
+VramQueueBuffer:	.res $100
 
 	.segment	"PRGFIXED"
 
@@ -56,6 +54,16 @@ vram_queue_set_ppu:
 	stx	VramQueueWriteIdx
 @no_space:
 	rts
+
+; Operator byte format:
+
+; 7654 3210
+; a... .... PPU address set marker
+; If PPU address:
+; .v.. .... PPU post-inc mode (0 = 1, 1 = 32)
+; .... hhhh High PPU address bits
+; Else:
+; ..ll llll Data byte count (if PPU address set marker is 0)
 
 vram_queue_set_buffer:
 ; TODO: Handle wrapping more gracefully
@@ -156,13 +164,3 @@ vram_queue_poll:
 	lda	PpuCtrlConfig
 	sta	PPUCTRL
 	rts
-
-	.segment	"ZP"
-; Indexing for array commands
-VramQueueWriteIdx:	.res 1
-VramQueueReadIdx:	.res 1
-VramQueueParseMode:	.res 1
-VramQueuePtr:	.res 2
-
-	.segment	"BSS"
-VramQueueBuffer:	.res $100

@@ -5,6 +5,12 @@
 
 	.importzp	Temp, Temp2
 
+	.segment	"ZEROPAGE"
+Pad1:		.res 1
+Pad1Prev:	.res 1
+Pad2:		.res 1
+Pad2Prev:	.res 1
+
 	.segment	"PRGFIXED"
 
 	.include	"macros/famicom.inc"
@@ -56,9 +62,3 @@ read_joypad_sub:
 	rol	Pad2
 	bcc	:-
 	rts
-
-	.segment	"ZP"
-Pad1:		.res 1
-Pad1Prev:	.res 1
-Pad2:		.res 1
-Pad2Prev:	.res 1

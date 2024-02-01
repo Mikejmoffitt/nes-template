@@ -1,7 +1,7 @@
 MEMORY 
 {
     # RAM
-    ZP:        start = $0000, size = $0100, file = "", type = rw;
+    ZEROPAGE:  start = $0000, size = $0100, file = "", type = rw;
     STACK:     start = $0100, size = $0100, file = "", type = rw;
     OAM:       start = $0200, size = $0100, file = "", type = rw;
     RAM:       start = $0300, size = $0400, file = "", type = rw;
@@ -32,7 +32,7 @@ SEGMENTS
 {
     HEADER:    load = HEADER, type = ro;
 
-    ZP:        load = ZP, type = zp;
+    ZEROPAGE:  load = ZEROPAGE, type = zp;
     STACK:     load = STACK, type = bss, align = $100;
     OAM_LIST:  load = OAM, type = bss, align = $100;
     BSS:       load = RAM, type = bss, align = $100;

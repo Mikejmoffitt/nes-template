@@ -1,8 +1,8 @@
 	.exportzp	Temp, Temp2, Temp3, Temp4, Temp5, Temp6, Temp7, Temp8
 	.exportzp	Addr, Addr2, Addr3, Addr4
-	.export	PpuMaskConfig, PpuCtrlConfig
+	.export		PpuMaskConfig, PpuCtrlConfig
 
-	.segment "ZP"
+	.segment "ZEROPAGE"
 ; Scratch memory for temporary variables and arguments
 Addr:		.res 2
 Addr2:		.res 2
